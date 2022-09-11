@@ -24,7 +24,12 @@ import com.beatrice.calculatorapp.presentation.ui.theme.CalculatorAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CalculatorScreen(modifier: Modifier = Modifier, sum: Sum = Sum(), onTextChanged: (String)-> Unit = {}) {
+fun CalculatorScreen(
+    modifier: Modifier = Modifier,
+    sum: Sum = Sum(),
+    onNum1Changed: (String) -> Unit = {},
+    onNum2Changed: (String) -> Unit = {}
+) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -39,7 +44,7 @@ fun CalculatorScreen(modifier: Modifier = Modifier, sum: Sum = Sum(), onTextChan
         Spacer(modifier = modifier.height(10.dp))
         OutlinedTextField(
             value = "${sum.num1}",
-            onValueChange = onTextChanged,
+            onValueChange = onNum1Changed,
             shape = RoundedCornerShape(12.dp)
         )
         Spacer(modifier = modifier.height(18.dp))
@@ -57,7 +62,7 @@ fun CalculatorScreen(modifier: Modifier = Modifier, sum: Sum = Sum(), onTextChan
         Spacer(modifier = modifier.height(10.dp))
         OutlinedTextField(
             value = "${sum.num2}",
-            onValueChange = onTextChanged,
+            onValueChange = onNum2Changed,
             shape = RoundedCornerShape(12.dp)
         )
         Spacer(modifier = modifier.height(18.dp))
@@ -68,7 +73,7 @@ fun CalculatorScreen(modifier: Modifier = Modifier, sum: Sum = Sum(), onTextChan
         )
         Spacer(modifier = modifier.height(20.dp))
         Text(
-            "20",
+            "${sum.sum}",
             fontSize = 34.sp,
             fontFamily = FontFamily.Serif
         )
