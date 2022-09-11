@@ -1,4 +1,4 @@
-package com.beatrice.calculatorapp.ui.theme
+package com.beatrice.calculatorapp.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
