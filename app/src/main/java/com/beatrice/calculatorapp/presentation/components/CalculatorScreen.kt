@@ -19,11 +19,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.beatrice.calculatorapp.presentation.model.Sum
 import com.beatrice.calculatorapp.presentation.ui.theme.CalculatorAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CalculatorScreen(modifier: Modifier = Modifier) {
+fun CalculatorScreen(modifier: Modifier = Modifier, sum: Sum = Sum(), onTextChanged: (String)-> Unit = {}) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -37,8 +38,8 @@ fun CalculatorScreen(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = modifier.height(10.dp))
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = "${sum.num1}",
+            onValueChange = onTextChanged,
             shape = RoundedCornerShape(12.dp)
         )
         Spacer(modifier = modifier.height(18.dp))
@@ -55,8 +56,8 @@ fun CalculatorScreen(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = modifier.height(10.dp))
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = "${sum.num2}",
+            onValueChange = onTextChanged,
             shape = RoundedCornerShape(12.dp)
         )
         Spacer(modifier = modifier.height(18.dp))
