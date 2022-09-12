@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
-class MathViewModel: ViewModel() {
+class MathViewModel : ViewModel() {
 
     val mathIntent = Channel<MathIntent>(Channel.UNLIMITED)
 
@@ -22,20 +22,21 @@ class MathViewModel: ViewModel() {
         handleIntent()
     }
 
-    private fun handleIntent(){
+    private fun handleIntent() {
         viewModelScope.launch {
-            mathIntent.consumeAsFlow().collect{intent ->
-                when(intent){
-                    is MathIntent.UpdateNum -> updateSum(intent)
+            mathIntent.consumeAsFlow().collect { intent ->
+                when (intent) {
+                    is MathIntent.UpdateSum -> updateSum(intent)
                 }
             }
         }
 
     }
-    private fun updateSum(intent: MathIntent.UpdateNum){
-        with(intent){
+
+    private fun updateSum(intent: MathIntent.UpdateSum) {
+        with(intent) {
             val result = num1.plus(num2)
-           val newSum = Sum(num1 = num1, num2= num2, sum = result)
+            val newSum = Sum(num1 = num1, num2 = num2, sum = result)
             _sumUiState.value = newSum
         }
 

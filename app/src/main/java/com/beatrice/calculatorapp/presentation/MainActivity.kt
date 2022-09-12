@@ -32,36 +32,30 @@ class MainActivity : ComponentActivity() {
                 ) {
                     CalculatorScreen(
                         sum = sum.value,
-                        onNum1Changed = {
-                            val num =
-                                try {
-                                    it.toInt()
-                                } catch (e: Exception) {
-                                    0
-                                }
-                            scope.launch {
-                                mathViewModel.mathIntent.send(
-                                    MathIntent.UpdateSum(
-                                        num1 = num,
-                                        num2 = sum.value.num2
+                        onNum1Changed = { newNum ->
+                            if (newNum != "") {
+                                val num = newNum.toInt()
+                                scope.launch {
+                                    mathViewModel.mathIntent.send(
+                                        MathIntent.UpdateSum(
+                                            num1 = num,
+                                            num2 = sum.value.num2
+                                        )
                                     )
-                                )
+                                }
                             }
                         },
-                        onNum2Changed = {
-                            val num =
-                                try {
-                                    it.toInt()
-                                } catch (e: Exception) {
-                                    0
-                                }
-                            scope.launch {
-                                mathViewModel.mathIntent.send(
-                                    MathIntent.UpdateSum(
-                                        num1 = sum.value.num1,
-                                        num2 = num
+                        onNum2Changed = { newNum ->
+                            if (newNum != "") {
+                                val num = newNum.toInt()
+                                scope.launch {
+                                    mathViewModel.mathIntent.send(
+                                        MathIntent.UpdateSum(
+                                            num1 = sum.value.num1,
+                                            num2 = num
+                                        )
                                     )
-                                )
+                                }
                             }
                         }
                     )
