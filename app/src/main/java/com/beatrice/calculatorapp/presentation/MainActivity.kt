@@ -2,7 +2,6 @@ package com.beatrice.calculatorapp.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,6 +32,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalLifecycleComposeApi::class, ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             val mathViewModel: MathViewModel = viewModel()
             val scope = rememberCoroutineScope()
@@ -49,7 +49,6 @@ class MainActivity : ComponentActivity() {
                         minActiveState = Lifecycle.State.STARTED
                     ).onEach {
                         it?.let {
-                            Log.d("MMMMH!", "Wait and see!")
                             snackbarHostState.showSnackbar("I am a snackbar! 😀")
                         }
                     }.launchIn(lifecycleScope)
