@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.beatrice.calculatorapp.presentation.model.Sum
 import com.beatrice.calculatorapp.presentation.ui.theme.CalculatorAppTheme
-import kotlinx.coroutines.launch
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,6 +61,7 @@ fun CalculatorScreen(
             val showSnackBar by remember(sum.sum) {
                 derivedStateOf { sum.sum > 100 }
             }
+
             Text(
                 "Num 1.",
                 fontSize = 18.sp,
@@ -105,11 +105,11 @@ fun CalculatorScreen(
                     fontFamily = FontFamily.Serif
                 )
             }
-            if (showSnackBar) {
-                scope.launch {
-                    snackbarHostState.showSnackbar("I am a snackbar! 😀")
-                }
-            }
+//            if (showSnackBar) {
+//                scope.launch {
+//                    snackbarHostState.showSnackbar("I am a snackbar! 😀")
+//                }
+//            }
         }
     }
 }
